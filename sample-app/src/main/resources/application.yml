@@ -5,22 +5,22 @@ feign:
     enabled: true
   client:
     config:
-      sampleService:
-        url: http://www.google.es
+      usersClient:
+        url: http://jsonplaceholder.typicode.com
         connectTimeout: 5000
         readTimeout: 5000
         errorDecoder: com.mylibraries.feign.errordecoders.CustomFeignErrorDecoder
         retryer: com.mylibraries.feign.retriers.NeverRetry
         decode404: false
         decoder: com.mylibraries.feign.decoders.CustomJacksonDecoder
-      sampleConfiguration:
-        url: http://www.google.es
+      commentsClient:
+        url: http://jsonplaceholder.typicode.com
         connectTimeout: 5000
         readTimeout: 5000
 
 resilience4j.circuitbreaker:
   instances:
-    sampleService:
+    usersClient:
       registerHealthIndicator: true
       slidingWindowSize: 10
       permittedNumberOfCallsInHalfOpenState: 3
@@ -30,7 +30,7 @@ resilience4j.circuitbreaker:
       failureRateThreshold: 50
       eventConsumerBufferSize: 10
       recordFailurePredicate: io.github.robwin.exception.RecordFailurePredicate
-    sampleConfiguration:
+    commentsClient:
       registerHealthIndicator: true
       slidingWindowSize: 10
       permittedNumberOfCallsInHalfOpenState: 3
@@ -40,7 +40,7 @@ resilience4j.circuitbreaker:
 
 resilience4j.retry:
   instances:
-    sampleService:
+    usersClient:
       maxRetryAttempts: 3
       waitDuration: 10s
       enableExponentialBackoff: true
@@ -53,20 +53,20 @@ resilience4j.retry:
 
 resilience4j.bulkhead:
   instances:
-    sampleService:
+    usersClient:
       maxWaitDuration: 10ms
       maxConcurrentCalls: 20
 
 resilience4j.thread-pool-bulkhead:
   instances:
-    sampleService:
+    usersClient:
       maxThreadPoolSize: 1
       coreThreadPoolSize: 1
       queueCapacity: 1
 
 resilience4j.ratelimiter:
   instances:
-    sampleService:
+    usersClient:
       limitForPeriod: 10
       limitRefreshPeriod: 1s
       timeoutDuration: 0
@@ -75,6 +75,6 @@ resilience4j.ratelimiter:
 
 resilience4j.timelimiter:
   instances:
-    sampleService:
+    usersClient:
       timeoutDuration: 2s
       cancelRunningFuture: true
