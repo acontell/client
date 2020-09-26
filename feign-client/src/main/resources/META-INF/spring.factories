@@ -1,0 +1,3 @@
+#Configuration classes to be loaded
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.example.client.FeignClientAutoConfiguration

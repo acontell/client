@@ -1,0 +1,69 @@
+feign:
+  hystrix:
+    enabled: false
+  okhttp:
+    enabled: true
+  client:
+    config:
+      sampleService:
+        url: http://www.google.es
+        connectTimeout: 5000
+        readTimeout: 5000
+        errorDecoder: com.mylibraries.feign.errordecoders.CustomFeignErrorDecoder
+        retryer: com.mylibraries.feign.retriers.NeverRetry
+        decode404: false
+        decoder: com.mylibraries.feign.decoders.CustomJacksonDecoder
+
+resilience4j.circuitbreaker:
+  instances:
+    sampleService:
+      registerHealthIndicator: true
+      slidingWindowSize: 10
+      permittedNumberOfCallsInHalfOpenState: 3
+      slidingWindowType: TIME_BASED
+      minimumNumberOfCalls: 20
+      waitDurationInOpenState: 50s
+      failureRateThreshold: 50
+      eventConsumerBufferSize: 10
+      recordFailurePredicate: io.github.robwin.exception.RecordFailurePredicate
+
+resilience4j.retry:
+  instances:
+    sampleService:
+      maxRetryAttempts: 3
+      waitDuration: 10s
+      enableExponentialBackoff: true
+      exponentialBackoffMultiplier: 2
+      retryExceptions:
+        - org.springframework.web.client.HttpServerErrorException
+        - java.io.IOException
+      ignoreExceptions:
+        - io.github.robwin.exception.BusinessException
+
+resilience4j.bulkhead:
+  instances:
+    sampleService:
+      maxWaitDuration: 10ms
+      maxConcurrentCalls: 20
+
+resilience4j.thread-pool-bulkhead:
+  instances:
+    sampleService:
+      maxThreadPoolSize: 1
+      coreThreadPoolSize: 1
+      queueCapacity: 1
+
+resilience4j.ratelimiter:
+  instances:
+    sampleService:
+      limitForPeriod: 10
+      limitRefreshPeriod: 1s
+      timeoutDuration: 0
+      registerHealthIndicator: true
+      eventConsumerBufferSize: 100
+
+resilience4j.timelimiter:
+  instances:
+    sampleService:
+      timeoutDuration: 2s
+      cancelRunningFuture: true
