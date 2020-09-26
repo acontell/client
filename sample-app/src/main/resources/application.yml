@@ -10,7 +10,7 @@ feign:
         connectTimeout: 5000
         readTimeout: 5000
         errorDecoder: com.mylibraries.feign.errordecoders.CustomFeignErrorDecoder
-        retryer: com.mylibraries.feign.retriers.NeverRetry
+        retryer: com.mylibraries.feign.retryers.NeverRetry
         decode404: false
         decoder: com.mylibraries.feign.decoders.CustomJacksonDecoder
       commentsClient:
@@ -29,7 +29,7 @@ resilience4j.circuitbreaker:
       waitDurationInOpenState: 50s
       failureRateThreshold: 50
       eventConsumerBufferSize: 10
-      recordFailurePredicate: io.github.robwin.exception.RecordFailurePredicate
+#      recordFailurePredicate: io.github.robwin.exception.RecordFailurePredicate
     commentsClient:
       registerHealthIndicator: true
       slidingWindowSize: 10
@@ -48,8 +48,8 @@ resilience4j.retry:
       retryExceptions:
         - org.springframework.web.client.HttpServerErrorException
         - java.io.IOException
-      ignoreExceptions:
-        - io.github.robwin.exception.BusinessException
+#      ignoreExceptions:
+#        - io.github.robwin.exception.BusinessException
 
 resilience4j.bulkhead:
   instances:
@@ -73,8 +73,8 @@ resilience4j.ratelimiter:
       registerHealthIndicator: true
       eventConsumerBufferSize: 100
 
-resilience4j.timelimiter:
-  instances:
-    usersClient:
-      timeoutDuration: 2s
-      cancelRunningFuture: true
+#resilience4j.timelimiter:
+#  instances:
+#    usersClient:
+#      timeoutDuration: 2s
+#      cancelRunningFuture: true
