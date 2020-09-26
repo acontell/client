@@ -1,0 +1,38 @@
+feign:
+  hystrix:
+    enabled: false
+  okhttp:
+    enabled: true
+  client:
+    config:
+      usersClient:
+        url: http://localhost:9001
+        connectTimeout: 500
+        readTimeout: 500
+        errorDecoder: com.mylibraries.feign.errordecoders.CustomFeignErrorDecoder
+        retryer: com.mylibraries.feign.retryers.NeverRetry
+        decode404: false
+        decoder: com.mylibraries.feign.decoders.CustomJacksonDecoder
+      commentsClient:
+        url: http://localhost:9001
+        connectTimeout: 300
+        readTimeout: 300
+
+resilience4j.circuitbreaker:
+  instances:
+    usersClient:
+      registerHealthIndicator: true
+      slidingWindowSize: 10
+      permittedNumberOfCallsInHalfOpenState: 3
+      slidingWindowType: TIME_BASED
+      minimumNumberOfCalls: 20
+      waitDurationInOpenState: 50s
+      failureRateThreshold: 50
+      eventConsumerBufferSize: 10
+    commentsClient:
+      registerHealthIndicator: true
+      slidingWindowSize: 10
+      permittedNumberOfCallsInHalfOpenState: 3
+      slidingWindowType: TIME_BASED
+      minimumNumberOfCalls: 20
+      failureRateThreshold: 50

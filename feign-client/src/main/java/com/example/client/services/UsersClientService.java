@@ -33,6 +33,6 @@ public class UsersClientService {
 
     private String getUsersFallback(final String request, final RuntimeException e) {
 
-        return null;
+        return "THIS WAS RETURNED FROM GET USERS FALL BACK";
     }
 }

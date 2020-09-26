@@ -16,6 +16,6 @@ public interface CommentsClient {
 
     default Object getCommentsFallback(final RuntimeException e) {
 
-        return null;
+        return "THIS WAS RETURNED FROM GET COMMENTS FALL BACK";
     }
 }
