@@ -1,7 +1,5 @@
 package com.example.sample.app.controllers;
 
-import com.example.client.models.Request;
-import com.example.client.models.Response;
 import com.example.client.services.SampleClientService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,8 +15,8 @@ public class TestController {
     }
 
     @GetMapping("/test-client")
-    public Response getResponse() {
+    public String getResponse() {
 
-        return this.sampleClientService.searchCustomerCostCenter(new Request());
+        return this.sampleClientService.searchCustomerCostCenter("HELLO");
     }
 }

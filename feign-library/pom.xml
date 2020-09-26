@@ -14,4 +14,15 @@
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
+    <properties>
+        <feign-okhttp.version>11.0</feign-okhttp.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>io.github.openfeign</groupId>
+            <artifactId>feign-okhttp</artifactId>
+            <version>${feign-okhttp.version}</version>
+        </dependency>
+    </dependencies>
 </project>

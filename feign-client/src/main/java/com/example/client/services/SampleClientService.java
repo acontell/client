@@ -2,8 +2,6 @@ package com.example.client.services;
 
 import com.example.client.clients.SampleClient;
 import com.example.client.models.Request;
-import com.example.client.models.Response;
-import com.example.client.models.SampleClientInterface;
 import io.github.resilience4j.bulkhead.annotation.Bulkhead;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
@@ -12,7 +10,7 @@ import io.github.resilience4j.timelimiter.annotation.TimeLimiter;
 import org.springframework.stereotype.Service;
 
 @Service
-public class SampleClientService implements SampleClientInterface {
+public class SampleClientService {
 
     private static final String SAMPLE_CLIENT_SERVICE_RESILIENCE_CONFIGURATION = "sampleService";
 
@@ -28,13 +26,14 @@ public class SampleClientService implements SampleClientInterface {
     @Bulkhead(name = SAMPLE_CLIENT_SERVICE_RESILIENCE_CONFIGURATION)
     @Retry(name = SAMPLE_CLIENT_SERVICE_RESILIENCE_CONFIGURATION, fallbackMethod = "searchCustomerBusinessFallback")
     @TimeLimiter(name = SAMPLE_CLIENT_SERVICE_RESILIENCE_CONFIGURATION)
-    @Override
-    public Response searchCustomerBusiness(final Request request) {
+    public String searchCustomerBusiness(final String request) {
 
-        return this.client.searchCustomerBusiness(request);
+        // Do some logic
+
+        return this.client.searchCustomerBusiness(new Request()).toString();
     }
 
-    private Response searchCustomerBusinessFallback(final Request request, final RuntimeException e) {
+    private String searchCustomerBusinessFallback(final String request, final RuntimeException e) {
 
         return null;
     }
@@ -44,13 +43,14 @@ public class SampleClientService implements SampleClientInterface {
     @Bulkhead(name = SAMPLE_CLIENT_SERVICE_RESILIENCE_CONFIGURATION)
     @Retry(name = SAMPLE_CLIENT_SERVICE_RESILIENCE_CONFIGURATION, fallbackMethod = "searchCustomerCostCenterFallback")
     @TimeLimiter(name = SAMPLE_CLIENT_SERVICE_RESILIENCE_CONFIGURATION)
-    @Override
-    public Response searchCustomerCostCenter(final Request request) {
+    public String searchCustomerCostCenter(final String request) {
 
-        return this.client.searchCustomerCostCenter(request);
+        // Do some logic
+
+        return this.client.searchCustomerCostCenter(new Request()).toString();
     }
 
-    private Response searchCustomerCostCenterFallback(final Request request, final RuntimeException e) {
+    private String searchCustomerCostCenterFallback(final String request, final RuntimeException e) {
 
         return null;
     }
@@ -60,13 +60,14 @@ public class SampleClientService implements SampleClientInterface {
     @Bulkhead(name = SAMPLE_CLIENT_SERVICE_RESILIENCE_CONFIGURATION)
     @Retry(name = SAMPLE_CLIENT_SERVICE_RESILIENCE_CONFIGURATION, fallbackMethod = "insertCustomerPersonFallback")
     @TimeLimiter(name = SAMPLE_CLIENT_SERVICE_RESILIENCE_CONFIGURATION)
-    @Override
-    public Response insertCustomerPerson(final Request request) {
+    public String insertCustomerPerson(final String request) {
 
-        return this.client.insertCustomerPerson(request);
+        // Do some logic
+
+        return this.client.insertCustomerPerson(new Request()).toString();
     }
 
-    private Response insertCustomerPersonFallback(final Request request, final RuntimeException e) {
+    private String insertCustomerPersonFallback(final String request, final RuntimeException e) {
 
         return null;
     }
@@ -76,13 +77,14 @@ public class SampleClientService implements SampleClientInterface {
     @Bulkhead(name = SAMPLE_CLIENT_SERVICE_RESILIENCE_CONFIGURATION)
     @Retry(name = SAMPLE_CLIENT_SERVICE_RESILIENCE_CONFIGURATION, fallbackMethod = "updateFiscalNameFallback")
     @TimeLimiter(name = SAMPLE_CLIENT_SERVICE_RESILIENCE_CONFIGURATION)
-    @Override
-    public Response updateFiscalName(final Request request) {
+    public String updateFiscalName(final String request) {
 
-        return this.client.updateFiscalName(request);
+        // Do some logic
+
+        return this.client.updateFiscalName(new Request()).toString();
     }
 
-    private Response updateFiscalNameFallback(final Request request, final RuntimeException e) {
+    private String updateFiscalNameFallback(final String request, final RuntimeException e) {
 
         return null;
     }

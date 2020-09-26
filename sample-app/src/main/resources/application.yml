@@ -13,6 +13,10 @@ feign:
         retryer: com.mylibraries.feign.retriers.NeverRetry
         decode404: false
         decoder: com.mylibraries.feign.decoders.CustomJacksonDecoder
+      sampleConfiguration:
+        url: http://www.google.es
+        connectTimeout: 5000
+        readTimeout: 5000
 
 resilience4j.circuitbreaker:
   instances:
@@ -26,6 +30,13 @@ resilience4j.circuitbreaker:
       failureRateThreshold: 50
       eventConsumerBufferSize: 10
       recordFailurePredicate: io.github.robwin.exception.RecordFailurePredicate
+    sampleConfiguration:
+      registerHealthIndicator: true
+      slidingWindowSize: 10
+      permittedNumberOfCallsInHalfOpenState: 3
+      slidingWindowType: TIME_BASED
+      minimumNumberOfCalls: 20
+      failureRateThreshold: 50
 
 resilience4j.retry:
   instances:
